@@ -9,9 +9,9 @@
 
 ## 发布与维护
 
-GitHub Pages 从 `main` 分支根目录发布；`.nojekyll` 保留原始静态文件结构。更新并推送 `main` 后，GitHub 会重新部署。
+GitHub Pages 从 `main` 分支根目录发布；`.nojekyll` 保留原始静态文件结构。修改源码后先运行 `npm ci`、`npm run build`，再提交生成的 `app-*.js`、`index.html` 和源码并推送 `main`，GitHub 会重新部署。所有 Three.js 和模型解码依赖由构建脚本打包，不使用运行时 CDN。
 
-运行依赖和 GLB 模型随仓库提供，无需运行时访问外部 CDN。官方资料链接仅在用户点击时打开。模型约 18.5 MB，首次加载速度取决于网络。
+优化版首次下载约 3.35 MB 的 gzip + Meshopt 模型；不支持浏览器 gzip 解压时使用约 4.55 MB 的 Meshopt GLB。243720 个三角面、独立盖板、装配关系和材质均保留。位置量化最大误差约 0.00165 mm；不进行减面或重新建模。完整原始 GLB 仍保留在仓库供回退。浏览器缓存已完成的模型，网络中断自动重试一次，超过 45 秒未收到数据时显示可重试错误。进度不使用可能代表 HTTP 压缩前后不同大小的 Content-Length。首次加载仍取决于访问 GitHub 的网络质量。
 
 本仓库只包含网页运行文件，不包含参考照片、原始 STEP、Blender 工程、账户凭据或本机启动脚本。现有自有域名站点仍保留，尚未切换到本仓库。
 
@@ -32,4 +32,4 @@ GitHub Pages 从 `main` 分支根目录发布；`.nojekyll` 保留原始静态�
 
 原厂模型版权：© Siemens AG 2025, All rights reserved。SIMATIC、SIEMENS 及相关标识属于其权利人。本教学网页并非西门子官方教学产品；功能图是教学原理示意，不是实际内部电路板。
 
-原厂资源的权利不因本仓库公开而改变；本仓库不授予额外的 Siemens 素材许可。Three.js 与 three-mesh-bvh 的许可证分别随 `vendor/LICENSE` 与 `vendor/three-mesh-bvh.LICENSE` 提供。
+原厂资源的权利不因本仓库公开而改变；本仓库不授予额外的 Siemens 素材许可。Three.js、three-mesh-bvh 与 Meshoptimizer 的许可证分别随 `vendor/LICENSE`、`vendor/three-mesh-bvh.LICENSE` 与 `vendor/meshoptimizer.LICENSE` 提供。

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { loadFactoryModel } from './model-loader.js';
 import { acceleratedRaycast, computeBoundsTree } from './vendor/three-mesh-bvh.js';
 import { topics } from './lesson.js';
 import { initPrinciple } from './principle.js';
@@ -288,6 +288,11 @@ function applyPose() {
 
 function showError(message) {
   $('viewer-error').hidden = false;
+  const alternate = $('alternate-site');
+  if (alternate && ['titleone01.github.io', 'plc.dianqisim.com'].includes(location.hostname)) {
+    alternate.href = location.hostname === 'titleone01.github.io' ? 'https://plc.dianqisim.com/' : 'https://titleone01.github.io/plc1215c-classroom/';
+    alternate.hidden = false;
+  }
   let details = $('viewer-error').querySelector('.error-detail');
   if (!details) { details = document.createElement('p'); details.className = 'error-detail'; $('viewer-error').prepend(details); }
   details.textContent = message;
@@ -303,9 +308,8 @@ async function loadModel() {
     const response = await fetch('./assets/calibration.json');
     if (!response.ok) throw new Error(`部件配置读取失败 (${response.status})`);
     calibration = await response.json();
-    const gltf = await new GLTFLoader().loadAsync('./assets/plc1215c.glb', progress => {
-      text('loading-text', progress.total ? `载入原厂模型 ${Math.round(progress.loaded / progress.total * 100)}%` : '载入原厂模型…');
-    });
+    const gltf = await loadFactoryModel(message => text('loading-text', message));
+    text('loading-text', '整理原厂部件…');
     if (model) scene.remove(model);
     model = gltf.scene; model.scale.setScalar(1000);
     raycastMeshes = [];
@@ -329,6 +333,7 @@ async function loadModel() {
     text('model-status', '原厂模型 · 已载入'); $('loading').hidden = true;
     goView('overview'); updateButtons();
     window.dispatchEvent(new CustomEvent('plc-ready'));
+    window.__PLC_LOAD__.readyAt = performance.now();
   } catch (error) {
     console.error(error);
     const help = location.protocol === 'file:'

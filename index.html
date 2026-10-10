@@ -9,7 +9,20 @@
   <title>认识 PLC · CPU 1215C 互动教材</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./principle.css">
-  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+  <script>
+    // Start the first model download alongside the script; revisits use the model cache.
+    if ('DecompressionStream' in window && 'caches' in window) {
+      caches.open('plc1215c-model-v1')
+        .then(cache => cache.match(new URL('./assets/plc1215c-7c7321cddc78.glb.gz', location.href).href))
+        .then(cached => {
+          if (cached) return;
+          const link = document.createElement('link');
+          link.rel = 'preload'; link.as = 'fetch'; link.crossOrigin = 'anonymous';
+          link.href = './assets/plc1215c-7c7321cddc78.glb.gz';
+          document.head.append(link);
+        }).catch(() => {});
+    }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#hardware-panel">跳到互动教材</a>
@@ -61,8 +74,9 @@
               <div id="viewer-error" class="viewer-error" role="alert" hidden>
                 <span class="error-symbol" aria-hidden="true">!</span>
                 <h2>模型暂时无法显示</h2>
-                <p>请使用配套启动脚本打开教材，并确认浏览器已启用硬件加速。</p>
+                <p>请检查网络后重新载入。若提示三维渲染不可用，请使用新版 Chrome 或 Edge，并启用硬件加速。</p>
                 <button id="retry-load" class="primary-button" type="button">重新载入模型</button>
+                <a id="alternate-site" href="https://plc.dianqisim.com/" class="source-link" hidden>尝试另一访问地址</a>
               </div>
               <div class="viewport-bottom">
                 <span class="gesture-hint"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="5.5" y="2.5" width="9" height="15" rx="4.5"/><path d="M10 3v5"/></svg><span>拖动旋转<span class="hint-divider">·</span>滚轮缩放<span class="touch-hint"> / 双指缩放</span></span></span>
@@ -126,6 +140,6 @@
       <span class="footer-model">S7-1200 <span aria-hidden="true">·</span> CPU 1215C</span>
     </footer>
   </div>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./app-8449cc4ce28a.js"></script>
 </body>
 </html>
