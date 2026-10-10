@@ -5,6 +5,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
+const calibration = JSON.parse(await readFile(path.join(root, 'assets/calibration.json'), 'utf8'));
+await writeFile(path.join(root, 'calibration-data.js'), `export default ${JSON.stringify(calibration)};\n`);
 const result = await build({
   absWorkingDir: root, entryPoints: ['app.js'], bundle: true, minify: true,
   format: 'esm', target: ['es2020'], write: false, legalComments: 'eof',

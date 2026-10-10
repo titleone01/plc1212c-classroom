@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { loadFactoryModel } from './model-loader.js';
+import calibrationData from './calibration-data.js';
 import { acceleratedRaycast, computeBoundsTree } from './vendor/three-mesh-bvh.js';
 import { topics } from './lesson.js';
 import { initPrinciple } from './principle.js';
@@ -305,9 +306,7 @@ async function loadModel() {
   text('loading-text', '载入西门子原厂模型…');
   try {
     if (!renderer) setupScene();
-    const response = await fetch('./assets/calibration.json');
-    if (!response.ok) throw new Error(`部件配置读取失败 (${response.status})`);
-    calibration = await response.json();
+    calibration = calibrationData;
     const gltf = await loadFactoryModel(message => text('loading-text', message));
     text('loading-text', '整理原厂部件…');
     if (model) scene.remove(model);
