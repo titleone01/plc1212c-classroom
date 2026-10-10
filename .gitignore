@@ -1,0 +1,9 @@
+.env
+.env.*
+.openai/
+node_modules/
+*.blend
+*.blend1
+*.stp
+*.step
+*.log

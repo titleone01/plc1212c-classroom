@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>认识 PLC 的硬件结构 · 数字教材嵌入示例</title>
+  <style>
+    :root{color-scheme:light;--ink:#163630;--muted:#697b75;--green:#126b55;--border:#dce6e0;--paper:#f6f8f3}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.7 "Microsoft YaHei","PingFang SC",sans-serif}
+    button,a{-webkit-tap-highlight-color:transparent}a{color:var(--green);text-underline-offset:4px}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #de9c43;outline-offset:4px}
+    header{background:#fff;border-bottom:1px solid var(--border)}.header-inner{max-width:1480px;margin:auto;padding:18px 34px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.04em}.brand svg{width:31px;height:31px}.badge{color:var(--muted);font-size:12px;letter-spacing:.12em}
+    main{max-width:1480px;margin:auto;padding:30px 34px 48px}.crumb{color:var(--muted);font-size:12px;margin:0 0 18px}.intro{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:end;margin-bottom:25px}.eyebrow{font-size:11px;color:var(--green);letter-spacing:.18em;font-weight:700;margin:0 0 7px}h1{font-size:clamp(26px,3vw,38px);line-height:1.35;margin:0 0 9px;letter-spacing:-.025em}.lead{color:var(--muted);margin:0;max-width:850px}.chapter{border-left:1px solid var(--border);padding-left:28px;color:var(--green);font-size:42px;line-height:1.1;font-weight:300}.chapter small{font-size:11px;display:block;margin-top:10px;letter-spacing:.12em}
+    .learning{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}.learning span{border:1px solid var(--border);background:#fff;border-radius:7px;padding:7px 12px;font-size:12px}.learning strong{color:var(--green);margin-right:8px;font-family:Consolas,monospace}
+    .viewer{background:#fff;border:1px solid #cddcd3;border-radius:15px;overflow:hidden;box-shadow:0 12px 40px #183d3010}.viewer-bar{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid var(--border)}.viewer-title{font-size:14px;font-weight:700}.viewer-title span{font-size:11px;font-weight:400;color:var(--muted);margin-left:13px}.viewer-actions{display:flex;align-items:center;gap:15px;font-size:12px}.viewer-actions button{border:1px solid var(--border);border-radius:6px;background:#f8faf7;color:var(--ink);padding:5px 12px}.viewer-actions a{white-space:nowrap;text-decoration:none}iframe{display:block;border:0;width:100%;height:830px;background:#eef3f0}.viewer:fullscreen{display:flex;flex-direction:column;background:#fff;border:0;border-radius:0}.viewer:fullscreen iframe{flex:1;height:auto;min-height:0}
+    .notes{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;margin-top:25px}.note{padding:23px 25px;border:1px solid var(--border);border-radius:11px;background:#fff}.note h2{font-size:16px;margin:0 0 10px}.note p{margin:6px 0;color:var(--muted);font-size:13px}.note ol{padding-left:20px;margin:0;font-size:13px;color:var(--muted)}.note li{padding:4px 0}.note code{font-size:12px;background:#edf3ee;padding:3px 6px;border-radius:4px;overflow-wrap:anywhere}.footer{font-size:11px;color:var(--muted);margin:23px 0 0}#fullscreen-status{font-size:12px;color:var(--muted);margin:7px 0 0;min-height:18px}
+    @media(max-width:760px){.header-inner{padding:15px 18px}.badge{display:none}main{padding:22px 14px 30px}.intro{display:block}.chapter{display:none}.lead{font-size:13px}.learning{gap:6px}.learning span{padding:5px 8px;font-size:11px}.viewer-bar{align-items:flex-start;padding:12px;gap:10px}.viewer-title span{display:block;margin:2px 0 0}.viewer-actions{gap:10px;font-size:11px}.viewer-actions button{padding:5px 8px}iframe{height:1120px}.notes{grid-template-columns:1fr;gap:12px}.note{padding:19px}h1{font-size:27px}.brand{font-size:14px}}
+  </style>
+</head>
+<body>
+  <header><div class="header-inner">
+    <div class="brand"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#126b55"/><path d="M7 9.5c3.8-1 6.5-.1 9 1.5 2.5-1.6 5.2-2.5 9-1.5v14c-3.6-.9-6.5-.2-9 1.5-2.5-1.7-5.4-2.4-9-1.5v-14Z" stroke="white" stroke-width="1.5"/><path d="M16 11v14" stroke="white" stroke-width="1.5"/></svg>PLC 技术与应用 · 数字教材</div>
+    <span class="badge">ONLINE TEACHING PREVIEW</span>
+  </div></header>
+  <main>
+    <p class="crumb">项目一 · 初识可编程控制器 / 任务 1.2 · 硬件认识</p>
+    <section class="intro"><div><p class="eyebrow">EXPLORE THE HARDWARE</p><h1>转一转，看懂 PLC 的每个位置</h1><p class="lead">以 SIMATIC S7-1200 CPU 1215C 为例，从外部接口走向内部功能。旋转实物模型、打开盖板，再把每个部位与它的用途对应起来。</p></div><div class="chapter">01<small>认识 · 观察 · 理解</small></div></section>
+    <div class="learning" aria-label="学习目标"><span><strong>01</strong>找到电源与输入输出端子</span><span><strong>02</strong>辨认通信与扩展接口</span><span><strong>03</strong>理解 PLC 的循环扫描</span></div>
+    <section class="viewer" id="viewer" aria-label="互动教学模型">
+      <div class="viewer-bar"><div class="viewer-title">互动实验台<span>拖动旋转 · 点击观察 · 单步理解</span></div><div class="viewer-actions"><button type="button" id="fullscreen">全屏学习</button><a href="./index.html" target="_blank" rel="noopener">独立打开 ↗</a></div></div>
+      <iframe src="./index.html" title="CPU 1215C 原厂模型互动教学网页" allow="fullscreen" allowfullscreen loading="eager"></iframe>
+    </section>
+    <p id="fullscreen-status" role="status" aria-live="polite"></p>
+    <section class="notes">
+      <article class="note"><h2>带着三个问题观察</h2><ol><li>DC/DC/DC 中的三个 DC，分别对应什么？</li><li>传感器、指示灯与电脑，分别连接到 PLC 的哪些位置？</li><li>输入信号发生变化后，程序中的输入状态与外部输出为什么可能不会立刻一起变化？</li></ol></article>
+      <article class="note"><h2>教材嵌入示例</h2><p>本页展示独立教学网页放进数字教材后的形式。互动区域由同目录的 <code>index.html</code> 通过 iframe 加载。</p><p>后续将完整 web 文件夹放入教材平台后，可根据平台要求调整 iframe 路径与高度。实际平台兼容性需接入后验证。</p></article>
+    </section>
+    <p class="footer">在线教学预览 · 原厂几何资源来自西门子 · 功能图为教学原理示意 · 本页不连接真实 PLC</p>
+  </main>
+  <script>
+    const viewer = document.getElementById('viewer');
+    const fullscreen = document.getElementById('fullscreen');
+    const status = document.getElementById('fullscreen-status');
+    fullscreen.addEventListener('click', async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else if (viewer.requestFullscreen) await viewer.requestFullscreen();
+        else status.textContent = '此浏览器不支持页面全屏，可点击“独立打开”扩大观察区域。';
+      } catch (error) {
+        status.textContent = '浏览器未允许全屏，可点击“独立打开”继续学习。';
+      }
+    });
+    document.addEventListener('fullscreenchange', () => {
+      fullscreen.textContent = document.fullscreenElement ? '退出全屏' : '全屏学习';
+      status.textContent = '';
+    });
+  </script>
+</body>
+</html>
