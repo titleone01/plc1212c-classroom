@@ -364,7 +364,7 @@ function animate(time) {
       controls.target.lerpVectors(cameraMotion.fromTarget, cameraMotion.target, eased);
       if (t >= 1) cameraMotion = null;
     }
-    controls.update(); updateHotspots(); renderer.render(scene, camera);
+    controls.update(); camera.updateMatrixWorld(true); updateHotspots(); renderer.render(scene, camera);
   }
   raf = requestAnimationFrame(animate);
 }
