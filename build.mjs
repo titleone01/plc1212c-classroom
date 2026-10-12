@@ -24,3 +24,4 @@ html = html.replace(/\s*<script type="importmap">.*?<\/script>/s, '');
 html = html.replace(/src="\.\/app(?:-[a-f0-9]+)?\.js"/, `src="./${filename}"`);
 await writeFile(path.join(root, 'index.html'), html);
 console.log(JSON.stringify({ bundle: filename, bytes: bytes.length }));
+await import('./build-offline.mjs');

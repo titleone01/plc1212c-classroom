@@ -312,8 +312,10 @@ async function loadModel() {
     if (model) scene.remove(model);
     model = gltf.scene; model.scale.setScalar(1000);
     raycastMeshes = [];
+    state.factoryTriangles = 0;
     model.traverse(object => {
       if (!object.isMesh) return;
+      state.factoryTriangles += (object.geometry.index?.count || object.geometry.attributes.position.count) / 3;
       if (!object.geometry.boundsTree) computeBoundsTree.call(object.geometry);
       object.castShadow = true; object.receiveShadow = true;
       raycastMeshes.push(object);

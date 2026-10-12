@@ -33,3 +33,6 @@ GitHub Pages 从 `main` 分支根目录发布；`.nojekyll` 保留原始静态�
 原厂模型版权：© Siemens AG 2025, All rights reserved。SIMATIC、SIEMENS 及相关标识属于其权利人。本教学网页并非西门子官方教学产品；功能图是教学原理示意，不是实际内部电路板。
 
 原厂资源的权利不因本仓库公开而改变；本仓库不授予额外的 Siemens 素材许可。Three.js、three-mesh-bvh 与 Meshoptimizer 的许可证分别随 `vendor/LICENSE`、`vendor/three-mesh-bvh.LICENSE` 与 `vendor/meshoptimizer.LICENSE` 提供。
+## 单个离线 HTML
+
+`npm ci` 后运行 `npm run build`，在线资源与 `offline/PLC_CPU1215C_离线.html` 一起生成。离线文件内嵌原厂模型、Three.js、Meshopt、样式、文字和二维扫描原理；单独拷贝、改名、移动后可直接双击使用，不需要邻接文件或本地服务。来源和第三方许可继续保留。
