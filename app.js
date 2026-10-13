@@ -24,7 +24,8 @@ THREE.Mesh.prototype.raycast = acceleratedRaycast;
 const ndc = new THREE.Vector2();
 const tmp = new THREE.Vector3();
 const sourceColor = new THREE.Color('#008f92');
-const principles = initPrinciple($('principle-panel'));
+// The course builds omit the principle module and its controls at compile time.
+const principles = __HARDWARE_ONLY__ ? null : initPrinciple($('principle-panel'));
 
 function text(id, value) { if ($(id)) $(id).textContent = value ?? ''; }
 function announce(value) { text('pose-label', value); }
@@ -69,7 +70,7 @@ for (const [index, topic] of topics.entries()) {
   $('topic-list').append(button);
 }
 
-document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => {
+if (!__HARDWARE_ONLY__) document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => {
   state.tab = button.dataset.tab;
   document.querySelectorAll('[data-tab]').forEach(other => {
     const active = other === button;
@@ -347,7 +348,7 @@ $('retry-load').addEventListener('click', () => { if (renderer?.getContext().isC
 
 function animate(time) {
   const dt = Math.min((time - lastTime) / 1000, 0.05); lastTime = time;
-  if (state.tab === 'hardware' && renderer) {
+  if ((__HARDWARE_ONLY__ || state.tab === 'hardware') && renderer) {
     if (!state.paused) {
       const factor = reducedMotion ? 1 : 1 - Math.exp(-dt * 7);
       for (const key of ['top', 'bottom', 'explode']) {
@@ -373,6 +374,6 @@ function animate(time) {
 window.__PLC__ = {
   snapshot: () => ({ ...state, visibleHotspots: [...hotspotElements].filter(([, element]) => !element.hidden).map(([id]) => id), camera: camera.position.toArray(), target: controls?.target.toArray(), triangles: renderer?.info.render.triangles, modelBounds: model ? new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3()).toArray() : null, partPositionsMM: state.loaded ? {top: topPivot.position.toArray().map(v=>v*1000), bottom: bottomPivot.position.toArray().map(v=>v*1000), signal: signalCover.position.toArray().map(v=>v*1000)} : null }),
 };
-window.addEventListener('pagehide', () => { cancelAnimationFrame(raf); principles.dispose?.(); });
+window.addEventListener('pagehide', () => { cancelAnimationFrame(raf); if (!__HARDWARE_ONLY__) principles.dispose?.(); });
 showTopic('overview', { moveCamera: false }); updateButtons();
 loadModel(); raf = requestAnimationFrame(animate);

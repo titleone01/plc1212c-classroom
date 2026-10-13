@@ -1,5 +1,16 @@
 # CPU 1215C 互动教学网页
 
+## 两门课程的独立硬件教材 · 2026-10-13
+
+- [工业网络与组态技术](https://titleone01.github.io/plc1215c-classroom/industrial-network/)
+- [PLC应用技术](https://titleone01.github.io/plc1215c-classroom/plc-application/)
+
+两个页面的左上角分别显示上述课程名，只保留硬件认识，支持原厂模型旋转、开盖、盖板拆离、进度拖动、部位标注和 12 个硬件主题。课程构建从脚本中移除工作原理与扫描演示模块，也移除相关面板、样式和扫描资料链接。
+
+修改共用硬件源码后运行 `npm run build`，按 `courses.json` 生成两个完整静态目录、`courses-manifest.json` 和 `offline/工业网络与组态技术_PLC硬件认识_离线.html`、`offline/PLC应用技术_PLC硬件认识_离线.html`。每个静态目录包含自己的脚本、样式、校准数据、模型和许可文件，可独立部署；每个离线 HTML 内嵌全部运行资源，可单独拷走及改名使用。各目录的 `embed-example.html` 展示对应公开页面的 iframe 嵌入。
+
+原教材根入口保留原有内容；历史 11 项交付文件和 Sites 独立站点仍按各自记录维护。本轮课程交付与验收记录另存于主项目的 `交付/PLC双课程硬件认识_20261013` 和 `outputs/PLC双课程硬件教材`。
+
 基于西门子 SIMATIC S7-1200 CPU 1215C DC/DC/DC（6ES7215-1AG40-0XB0）原厂 CAD 的中文静态教学网页。
 
 - [在线教材](https://titleone01.github.io/plc1215c-classroom/)

@@ -10,6 +10,7 @@ await writeFile(path.join(root, 'calibration-data.js'), `export default ${JSON.s
 const result = await build({
   absWorkingDir: root, entryPoints: ['app.js'], bundle: true, minify: true,
   format: 'esm', target: ['es2020'], write: false, legalComments: 'eof',
+  define: { __HARDWARE_ONLY__: 'false' },
   plugins: [{ name: 'vendored-three', setup(builder) {
     builder.onResolve({ filter: /^three$/ }, () => ({ path: path.join(root, 'vendor/three.module.js') }));
     builder.onResolve({ filter: /^three\/addons\// }, args => ({ path: path.join(root, 'vendor/addons', args.path.slice('three/addons/'.length)) }));
@@ -25,3 +26,4 @@ html = html.replace(/src="\.\/app(?:-[a-f0-9]+)?\.js"/, `src="./${filename}"`);
 await writeFile(path.join(root, 'index.html'), html);
 console.log(JSON.stringify({ bundle: filename, bytes: bytes.length }));
 await import('./build-offline.mjs');
+await import('./build-courses.mjs');

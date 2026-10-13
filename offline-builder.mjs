@@ -30,6 +30,7 @@ export async function writeOffline(root, destination, options = {}) {
   const result = await build({
     absWorkingDir: root, entryPoints: ['app.js'], bundle: true, minify: true,
     format: 'iife', target: ['es2020'], write: false, legalComments: 'eof',
+    define: { __HARDWARE_ONLY__: 'false', ...options.define },
     plugins: [{ name: 'standalone', setup(b) {
       b.onResolve({ filter: /model-loader\.js$/ }, () => ({ path: 'embedded-loader', namespace: 'offline' }));
       b.onLoad({ filter: /.*/, namespace: 'offline' }, () => ({ contents: virtualLoader, resolveDir: root, loader: 'js' }));
@@ -37,11 +38,11 @@ export async function writeOffline(root, destination, options = {}) {
       b.onResolve({ filter: /^three\/addons\// }, a => ({ path: path.join(root, 'vendor/addons', a.path.slice('three/addons/'.length)) }));
     } }],
   });
-  let html = await readFile(path.join(root, 'index.html'), 'utf8');
+  let html = options.html ?? await readFile(path.join(root, 'index.html'), 'utf8');
   // Online preloads and module entries must not survive standalone packaging.
   html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
   const styles = [...html.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="([^"]+)"[^>]*>/gi)];
-  for (const match of styles) { const css=await readFile(path.resolve(root, match[1]), 'utf8'); html = html.replace(match[0], () => `<style>${css}</style>`); }
+  for (const match of styles) { const css=await readFile(path.resolve(options.documentRoot || root, match[1]), 'utf8'); html = html.replace(match[0], () => `<style>${css}</style>`); }
   html = html.replace(/<link\b[^>]*rel="icon"[^>]*>/gi, '<link rel="icon" href="data:,">');
   html = html.replaceAll('href="./embed-example.html"', `href="${options.onlineUrl || ''}embed-example.html"`);
   html = html.replace('<title>', '<title>离线 · ');
