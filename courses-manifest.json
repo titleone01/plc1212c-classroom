@@ -10,7 +10,7 @@
       "bundle": "app-c98b1a50b7ef.js",
       "bundleSha256": "c98b1a50b7ef15023bd4000829885422113061bab7a590b4db3c8c0f3d023a1d",
       "htmlSha256": "9c35c80a605363fb2c5736fe5ef871106dc1142bfd139da9f1b683eff4e08aff",
-      "stylesheetSha256": "77455a86cfce1087fa39ec56a0e3315db4c831c19dee216abe5ef43cd84fb406",
+      "stylesheetSha256": "c6ca8fec1323769f210f4c269ef0bcd8869dafeb933c759111100286affdc843",
       "models": [
         {
           "file": "plc1215c-7c7321cddc78.glb.gz",
@@ -25,8 +25,8 @@
       ],
       "offline": {
         "file": "工业网络与组态技术_PLC硬件认识_离线.html",
-        "bytes": 6871873,
-        "sha256": "96e3a3e07935b50cddb7a8a45b1e9229b4466bdedb6ed82b30d9bc1a46248572",
+        "bytes": 6871872,
+        "sha256": "08c289f7627fabc1fada347a259970879bebceaf765d0b82cf65f0416e748482",
         "embeddedModelSha256": "7c7321cddc7852733d18daca63ad015270c1c9de6d6a8e88542badada93997c1",
         "modelBytes": 4554808,
         "source": "same source and model as online; classic inline script; embedded ArrayBuffer"
@@ -40,7 +40,7 @@
       "bundle": "app-c98b1a50b7ef.js",
       "bundleSha256": "c98b1a50b7ef15023bd4000829885422113061bab7a590b4db3c8c0f3d023a1d",
       "htmlSha256": "bb2d363955446865d78c59d6eb42807f201208ded7cffaa4e2129309a9fd4f74",
-      "stylesheetSha256": "77455a86cfce1087fa39ec56a0e3315db4c831c19dee216abe5ef43cd84fb406",
+      "stylesheetSha256": "c6ca8fec1323769f210f4c269ef0bcd8869dafeb933c759111100286affdc843",
       "models": [
         {
           "file": "plc1215c-7c7321cddc78.glb.gz",
@@ -55,8 +55,8 @@
       ],
       "offline": {
         "file": "PLC应用技术_PLC硬件认识_离线.html",
-        "bytes": 6871837,
-        "sha256": "cd9090ba91eff7b0767ed9ae688b1fa8be96bdd89b2e7f241d4bd32f9c72992b",
+        "bytes": 6871836,
+        "sha256": "e744d77124ef039d2c060adab523f4ac10c4fef7c391f5cfcf2c979ee7c02542",
         "embeddedModelSha256": "7c7321cddc7852733d18daca63ad015270c1c9de6d6a8e88542badada93997c1",
         "modelBytes": 4554808,
         "source": "same source and model as online; classic inline script; embedded ArrayBuffer"

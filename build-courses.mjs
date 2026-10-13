@@ -33,6 +33,7 @@ assert.doesNotMatch(result.outputFiles[0].text, /principle-panel|data-action=.?s
 
 const template = await readFile(path.join(root, 'index.html'), 'utf8');
 const stylesheet = (await readFile(path.join(root, 'styles.css'), 'utf8'))
+  .replaceAll('\r\n', '\n')
   .replace('#principle-panel{break-before:page}', '')
   + '\n/* The hardware section is a heading in these single-section courses. */\n'
   + '.lesson-tab{margin:0;cursor:default}.publication-brand{min-width:0}.course-title{overflow-wrap:anywhere}\n'
