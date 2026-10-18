@@ -1,7 +1,11 @@
 {
-  "name": "plc1215c-classroom",
+  "name": "plc1212c-classroom",
   "private": true,
   "type": "module",
-  "scripts": { "build": "node build.mjs" },
-  "devDependencies": { "esbuild": "0.28.2" }
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
 }

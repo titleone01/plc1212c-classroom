@@ -2,3 +2,5 @@
 *.glb -text
 *.png -text
 *.jpg -text
+*.gz -text
+*.zip -text

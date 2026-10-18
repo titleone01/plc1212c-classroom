@@ -60,8 +60,9 @@ export async function writeOffline(root, destination, options = {}) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const root = path.resolve(process.argv[2]);
-  let options={};
-  if (path.basename(root)==='plc-github-pages') options={model:{fallback:'plc1215c-7c7321cddc78.glb',decodedBytes:4554808},onlineUrl:'https://titleone01.github.io/plc1215c-classroom/'};
-  else if (path.basename(root)==='nxc09-github-pages') options={onlineUrl:'https://titleone01.github.io/nxc09-classroom/'};
+  const courseId=process.argv[4];
+  const courses=JSON.parse(await readFile(path.join(root,'courses.json'),'utf8'));
+  if(!courses.some(course=>course.id===courseId)) throw new Error('Supply course id after destination: industrial-network or plc-application');
+  const options={model:JSON.parse(await readFile(path.join(root,'assets/model.json'),'utf8')),define:{__HARDWARE_ONLY__:'true'},onlineUrl:`https://titleone01.github.io/plc1212c-classroom/${courseId}/`,html:await readFile(path.join(root,courseId,'index.html'),'utf8'),documentRoot:path.join(root,courseId)};
   console.log(JSON.stringify(await writeOffline(root,path.resolve(process.argv[3]),options)));
 }

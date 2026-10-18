@@ -8,14 +8,10 @@ import { writeOffline } from './offline-builder.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const courses = JSON.parse(await readFile(path.join(root, 'courses.json'), 'utf8'));
-const baseUrl = 'https://titleone01.github.io/plc1215c-classroom/';
+const baseUrl = 'https://titleone01.github.io/plc1212c-classroom/';
 const define = { __HARDWARE_ONLY__: 'true' };
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
-const model = {
-  fallback: 'plc1215c-7c7321cddc78.glb',
-  compressed: 'plc1215c-7c7321cddc78.glb.gz',
-  decodedBytes: 4554808,
-};
+const model = JSON.parse(await readFile(path.join(root, 'assets/model.json'), 'utf8'));
 
 // Both documents share the maintained hardware source, but each output directory
 // contains its own complete runtime and can be hosted at any directory depth.
@@ -31,7 +27,7 @@ const bytes = result.outputFiles[0].contents;
 const bundle = `app-${sha256(bytes).slice(0, 12)}.js`;
 assert.doesNotMatch(result.outputFiles[0].text, /principle-panel|data-action=.?step|scan-readout|输出过程映像 PIQ/);
 
-const template = await readFile(path.join(root, 'index.html'), 'utf8');
+const template = await readFile(path.join(root, 'course-template.html'), 'utf8');
 const stylesheet = (await readFile(path.join(root, 'styles.css'), 'utf8'))
   .replaceAll('\r\n', '\n')
   .replace('#principle-panel{break-before:page}', '')
@@ -44,7 +40,7 @@ function courseHtml(course) {
   assert.ok(html.includes('电气实训<span class="brand-divider">/</span>数字教材'));
   assert.match(html, /id="tab-principle"/);
   html = html.replace(/<title>.*?<\/title>/, `<title>${course.title} · PLC硬件认识</title>`)
-    .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${course.title}：基于西门子原厂 CAD 的 CPU 1215C 硬件认识，支持旋转观察、开盖、拆解与接口讲解。">`)
+    .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${course.title}：基于西门子原厂 CAD 的 CPU 1212C 硬件认识，支持旋转观察、开盖、拆解与接口讲解。">`)
     .replace('<span>电气实训<span class="brand-divider">/</span>数字教材</span>', `<span class="course-title">${course.title}</span>`)
     .replace(/\s*<link rel="stylesheet" href="\.\/principle\.css">/, '')
     .replace(/<div class="lesson-tabs" role="tablist" aria-label="学习内容">[\s\S]*?<\/div>/, '<div class="lesson-tabs"><h2 class="lesson-tab active" id="hardware-heading"><span class="tab-number">01</span>硬件认识</h2></div>')
@@ -57,7 +53,7 @@ function courseHtml(course) {
   return html;
 }
 
-const manifest = { source: 'Siemens CPU 1215C DC/DC/DC 6ES7215-1AG40-0XB0', hardwareOnly: true, courses: [] };
+const manifest = { model, source: 'Siemens CPU 1212C AC/DC/RLY 6ES7212-1BE40-0XB0', hardwareOnly: true, courses: [] };
 for (const course of courses) {
   assert.match(course.id, /^[a-z]+(?:-[a-z]+)*$/);
   const destination = path.join(root, course.id);
@@ -67,6 +63,7 @@ for (const course of courses) {
   await writeFile(path.join(destination, 'styles.css'), stylesheet);
   await copyFile(path.join(root, 'calibration-data.js'), path.join(destination, 'calibration-data.js'));
   await copyFile(path.join(root, 'LICENSE'), path.join(destination, 'LICENSE'));
+  await copyFile(path.join(root, 'THIRD_PARTY_NOTICES.md'), path.join(destination, 'THIRD_PARTY_NOTICES.md'));
   for (const license of ['LICENSE', 'meshoptimizer.LICENSE', 'three-mesh-bvh.LICENSE']) {
     await copyFile(path.join(root, 'vendor', license), path.join(destination, 'vendor', license));
   }

@@ -2,13 +2,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from './vendor/meshopt_decoder.mjs';
 
 // Versioned resources keep cached files consistent with their decoder and assembly.
-export const modelAsset = {
-  compressed: 'plc1215c-7c7321cddc78.glb.gz',
-  fallback: 'plc1215c-7c7321cddc78.glb',
-  compressedBytes: 3345812,
-  decodedBytes: 4554808,
-};
-const cacheName = 'plc1215c-model-v1';
+export const modelAsset = {"compressed":"plc1212c-173142dca76c.glb.gz","fallback":"plc1212c-173142dca76c.glb","compressedBytes":2651686,"decodedBytes":3623520,"factoryTriangles":189814,"orderNumber":"6ES7212-1BE40-0XB0"};
+const cacheName = 'plc1212c-model-v1';
 const isGLB = bytes => bytes.length >= 4 && bytes[0] === 103 && bytes[1] === 108 && bytes[2] === 84 && bytes[3] === 70;
 const metrics = { source: '', bytes: 0, attempts: 0, started: 0, decodedAt: 0 };
 window.__PLC_LOAD__ = metrics;

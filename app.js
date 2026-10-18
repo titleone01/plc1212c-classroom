@@ -4,7 +4,6 @@ import { loadFactoryModel } from './model-loader.js';
 import calibrationData from './calibration-data.js';
 import { acceleratedRaycast, computeBoundsTree } from './vendor/three-mesh-bvh.js';
 import { topics } from './lesson.js';
-import { initPrinciple } from './principle.js';
 
 const $ = id => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -25,7 +24,7 @@ const ndc = new THREE.Vector2();
 const tmp = new THREE.Vector3();
 const sourceColor = new THREE.Color('#008f92');
 // The course builds omit the principle module and its controls at compile time.
-const principles = __HARDWARE_ONLY__ ? null : initPrinciple($('principle-panel'));
+const principles = null;
 
 function text(id, value) { if ($(id)) $(id).textContent = value ?? ''; }
 function announce(value) { text('pose-label', value); }
@@ -151,7 +150,7 @@ function setupScene() {
   renderer.toneMappingExposure = 1.18;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  renderer.domElement.setAttribute('aria-label', '西门子 CPU 1215C 三维模型，可拖动旋转、滚轮缩放');
+  renderer.domElement.setAttribute('aria-label', '西门子 CPU 1212C 三维模型，可拖动旋转、滚轮缩放');
   renderer.domElement.tabIndex = 0;
   stage.prepend(renderer.domElement);
   controls = new OrbitControls(camera, renderer.domElement);
@@ -290,11 +289,6 @@ function applyPose() {
 
 function showError(message) {
   $('viewer-error').hidden = false;
-  const alternate = $('alternate-site');
-  if (alternate && ['titleone01.github.io', 'plc.dianqisim.com'].includes(location.hostname)) {
-    alternate.href = location.hostname === 'titleone01.github.io' ? 'https://plc.dianqisim.com/' : 'https://titleone01.github.io/plc1215c-classroom/';
-    alternate.hidden = false;
-  }
   let details = $('viewer-error').querySelector('.error-detail');
   if (!details) { details = document.createElement('p'); details.className = 'error-detail'; $('viewer-error').prepend(details); }
   details.textContent = message;

@@ -1,64 +1,72 @@
 {
-  "source": "Siemens CPU 1215C DC/DC/DC 6ES7215-1AG40-0XB0",
+  "model": {
+    "compressed": "plc1212c-173142dca76c.glb.gz",
+    "fallback": "plc1212c-173142dca76c.glb",
+    "compressedBytes": 2651686,
+    "decodedBytes": 3623520,
+    "factoryTriangles": 189814,
+    "orderNumber": "6ES7212-1BE40-0XB0"
+  },
+  "source": "Siemens CPU 1212C AC/DC/RLY 6ES7212-1BE40-0XB0",
   "hardwareOnly": true,
   "courses": [
     {
       "id": "industrial-network",
       "title": "工业网络与组态技术",
-      "offlineFile": "工业网络与组态技术_PLC硬件认识_离线.html",
-      "url": "https://titleone01.github.io/plc1215c-classroom/industrial-network/",
-      "bundle": "app-c98b1a50b7ef.js",
-      "bundleSha256": "c98b1a50b7ef15023bd4000829885422113061bab7a590b4db3c8c0f3d023a1d",
-      "htmlSha256": "9c35c80a605363fb2c5736fe5ef871106dc1142bfd139da9f1b683eff4e08aff",
+      "offlineFile": "工业网络与组态技术_CPU1212C_AC_DC_RLY_硬件认识_离线.html",
+      "url": "https://titleone01.github.io/plc1212c-classroom/industrial-network/",
+      "bundle": "app-817f668c1ad9.js",
+      "bundleSha256": "817f668c1ad944e6ce3e524472da14d112faed3caa9039600d68a92fc5c64f6d",
+      "htmlSha256": "9ee4d2d686cbd887686102406450d586f0534a4995d295702b8d831b674050a7",
       "stylesheetSha256": "c6ca8fec1323769f210f4c269ef0bcd8869dafeb933c759111100286affdc843",
       "models": [
         {
-          "file": "plc1215c-7c7321cddc78.glb.gz",
-          "bytes": 3345812,
-          "sha256": "dffa874cca8d2f38ef36d1a08580683bfb52986eede64fec0e0d90b2912c34ae"
+          "file": "plc1212c-173142dca76c.glb.gz",
+          "bytes": 2651686,
+          "sha256": "40ae33e04c3fe8babb04648c51049b38a24f8f9006839bcf5e5a8c36dd0a357c"
         },
         {
-          "file": "plc1215c-7c7321cddc78.glb",
-          "bytes": 4554808,
-          "sha256": "7c7321cddc7852733d18daca63ad015270c1c9de6d6a8e88542badada93997c1"
+          "file": "plc1212c-173142dca76c.glb",
+          "bytes": 3623520,
+          "sha256": "173142dca76c9817e39ad9c167e4d47e87e7261fab89e8eef72e4b3c2370f70e"
         }
       ],
       "offline": {
-        "file": "工业网络与组态技术_PLC硬件认识_离线.html",
-        "bytes": 6871872,
-        "sha256": "08c289f7627fabc1fada347a259970879bebceaf765d0b82cf65f0416e748482",
-        "embeddedModelSha256": "7c7321cddc7852733d18daca63ad015270c1c9de6d6a8e88542badada93997c1",
-        "modelBytes": 4554808,
+        "file": "工业网络与组态技术_CPU1212C_AC_DC_RLY_硬件认识_离线.html",
+        "bytes": 5630008,
+        "sha256": "871885a96777d3dad2afc75f5a638f68855dcd35b73c1ca1eea69cdd712f81c1",
+        "embeddedModelSha256": "173142dca76c9817e39ad9c167e4d47e87e7261fab89e8eef72e4b3c2370f70e",
+        "modelBytes": 3623520,
         "source": "same source and model as online; classic inline script; embedded ArrayBuffer"
       }
     },
     {
       "id": "plc-application",
       "title": "PLC应用技术",
-      "offlineFile": "PLC应用技术_PLC硬件认识_离线.html",
-      "url": "https://titleone01.github.io/plc1215c-classroom/plc-application/",
-      "bundle": "app-c98b1a50b7ef.js",
-      "bundleSha256": "c98b1a50b7ef15023bd4000829885422113061bab7a590b4db3c8c0f3d023a1d",
-      "htmlSha256": "bb2d363955446865d78c59d6eb42807f201208ded7cffaa4e2129309a9fd4f74",
+      "offlineFile": "PLC应用技术_CPU1212C_AC_DC_RLY_硬件认识_离线.html",
+      "url": "https://titleone01.github.io/plc1212c-classroom/plc-application/",
+      "bundle": "app-817f668c1ad9.js",
+      "bundleSha256": "817f668c1ad944e6ce3e524472da14d112faed3caa9039600d68a92fc5c64f6d",
+      "htmlSha256": "fea40ba0157fd9b916857c9a24898fc95baf37c95494447c342222e2ff5ab3da",
       "stylesheetSha256": "c6ca8fec1323769f210f4c269ef0bcd8869dafeb933c759111100286affdc843",
       "models": [
         {
-          "file": "plc1215c-7c7321cddc78.glb.gz",
-          "bytes": 3345812,
-          "sha256": "dffa874cca8d2f38ef36d1a08580683bfb52986eede64fec0e0d90b2912c34ae"
+          "file": "plc1212c-173142dca76c.glb.gz",
+          "bytes": 2651686,
+          "sha256": "40ae33e04c3fe8babb04648c51049b38a24f8f9006839bcf5e5a8c36dd0a357c"
         },
         {
-          "file": "plc1215c-7c7321cddc78.glb",
-          "bytes": 4554808,
-          "sha256": "7c7321cddc7852733d18daca63ad015270c1c9de6d6a8e88542badada93997c1"
+          "file": "plc1212c-173142dca76c.glb",
+          "bytes": 3623520,
+          "sha256": "173142dca76c9817e39ad9c167e4d47e87e7261fab89e8eef72e4b3c2370f70e"
         }
       ],
       "offline": {
-        "file": "PLC应用技术_PLC硬件认识_离线.html",
-        "bytes": 6871836,
-        "sha256": "e744d77124ef039d2c060adab523f4ac10c4fef7c391f5cfcf2c979ee7c02542",
-        "embeddedModelSha256": "7c7321cddc7852733d18daca63ad015270c1c9de6d6a8e88542badada93997c1",
-        "modelBytes": 4554808,
+        "file": "PLC应用技术_CPU1212C_AC_DC_RLY_硬件认识_离线.html",
+        "bytes": 5629972,
+        "sha256": "957cbfc5c64b7f73aeae7f97f58ea9805e88dbe9d19d0793eff228a0dc915860",
+        "embeddedModelSha256": "173142dca76c9817e39ad9c167e4d47e87e7261fab89e8eef72e4b3c2370f70e",
+        "modelBytes": 3623520,
         "source": "same source and model as online; classic inline script; embedded ArrayBuffer"
       }
     }
